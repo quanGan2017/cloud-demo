@@ -1,0 +1,5 @@
+
+/.idea/
+/cloud-admin/target/
+*.iml
+*.gitignore

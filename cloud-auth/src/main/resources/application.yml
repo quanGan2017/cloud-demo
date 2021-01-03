@@ -1,0 +1,57 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /cloud/auth
+
+spring:
+  application:
+    name: cloud-auth
+  datasource:
+    username: wanzhai_2020
+    password: wanzhai2020
+    url: jdbc:mysql://rm-2zecepz58whab23esoo.mysql.rds.aliyuncs.com:3306/wanzhai_2020?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 123.57.79.202
+    port: 6379
+    password: 123456
+  rabbitmq:
+    host: 123.57.79.202
+    port: 5672
+    username: username
+    password: password
+    publisher-confirms: true
+    publisher-returns: true
+
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 10
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.client2.pojo
+
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

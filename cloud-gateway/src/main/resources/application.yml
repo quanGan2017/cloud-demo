@@ -1,0 +1,64 @@
+server:
+  port: 8061
+  servlet:
+    context-path: /cloud/gateway
+
+spring:
+  application:
+    name: cloud-gateway
+  redis:
+    host: 123.57.79.202
+    port: 6379
+    password: 123456
+  rabbitmq:
+    host: 123.57.79.202
+    port: 25672
+    username: username
+    password: password
+  cloud:
+    gateway:
+      routes:
+      - id: cloud-client1-route
+        uri: lb://cloud-client1
+        predicates:
+        - Path=/cloud/client1/**
+#        - Host=**.foo.org
+#        - Method=GET
+#        - Header=X-Request-Id, \d+
+#        - Query=foo, ba.
+#        - Query=baz
+#        - Cookie=chocolate, ch.p
+      filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: gateWayFallback
+            fallbackUri: forward:/fallback
+        - name: RequestRateLimiter  #限流需要redis
+          args:
+            key-resolver: '#{@userKeyResolver}' #用于限流的键的解析器的 Bean 对象的名字
+            redis-rate-limiter.replenishRate: 1 #令牌桶每秒填充平均速率
+            redis-rate-limiter.burstCapacity: 3 #令牌桶总容量
+hystrix.command.gateWayFallback.execution.isolation.thread.timeoutInMilliseconds: 5000
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://123.57.79.202:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 10
+    lease-renewal-interval-in-seconds: 10
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+
