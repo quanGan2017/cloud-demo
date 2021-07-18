@@ -7,11 +7,11 @@ spring:
   application:
     name: cloud-gateway
   redis:
-    host: 123.57.79.202
+    host: 120.79.80.228
     port: 6379
-    password: 123456
+   # password: redis_123456
   rabbitmq:
-    host: 123.57.79.202
+    host: 120.79.80.228
     port: 25672
     username: username
     password: password
@@ -28,6 +28,10 @@ spring:
 #        - Query=foo, ba.
 #        - Query=baz
 #        - Cookie=chocolate, ch.p
+      - id: cloud-auth-route
+        uri: lb://cloud-auth
+        predicates:
+        - Path=/cloud/auth/**
       filters:
         - StripPrefix=1
         - name: Hystrix
@@ -46,7 +50,7 @@ eureka:
     fetchRegistry: true
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://123.57.79.202:8761/eureka/
+      defaultZone: http://120.79.80.228:8761/eureka/
   instance:
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 10

@@ -10,7 +10,7 @@ eureka:
     fetchRegistry: true
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://123.57.79.202:8761/eureka/
   instance:
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 10

@@ -7,17 +7,19 @@ spring:
   application:
     name: cloud-auth
   datasource:
-    username: wanzhai_2020
-    password: wanzhai2020
-    url: jdbc:mysql://rm-2zecepz58whab23esoo.mysql.rds.aliyuncs.com:3306/wanzhai_2020?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: Gq20210703
+#    password: Dv81dcCQ01a9Ouzzb68HiOhMdOrG+BlhHhmAXroyYcamfirg/15GeVanKPrtQs3UBCqMj4b97JBVE2klm0sDzA==
+#    publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIEiz3PsVCAY1BsABEDvUaoZzCSVehN/jnwUlbGVBvqZfU5VbObD96tUVo0oewk21iqHuJHPD8CUYxzSHbYEALcCAwEAAQ==
+    url: jdbc:mysql://rm-wz973y9ee1j192bnr9o.mysql.rds.aliyuncs.com:3306/mysql_cloud?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
-    host: 123.57.79.202
+    host: 120.79.80.228
     port: 6379
     password: 123456
   rabbitmq:
-    host: 123.57.79.202
+    host: 120.79.80.228
     port: 5672
     username: username
     password: password
@@ -31,7 +33,7 @@ eureka:
     fetchRegistry: true
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://120.79.80.228:8761/eureka/
   instance:
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 10
@@ -39,7 +41,7 @@ eureka:
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
-  type-aliases-package: com.client2.pojo
+  type-aliases-package: com.example.cloudclient1.pojo
 
 #showSql
 logging:

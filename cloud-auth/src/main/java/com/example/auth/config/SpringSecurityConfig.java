@@ -2,7 +2,6 @@ package com.example.auth.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.Resource;
 
@@ -66,12 +64,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(customAuthenticationFailureHandler)
                 .and()
                 .authorizeRequests() // 认证请求
-//                .antMatchers(securityProperties.getAuthentication().getLoginPage(),
+                .antMatchers(
+                        "/auth/login"
+//                        securityProperties.getAuthentication().getLoginPage(),
 //                //      "/code/image","/mobile/page", "/code/mobile"
 //                        securityProperties.getAuthentication().getImageCodeUrl(),
 //                        securityProperties.getAuthentication().getMobilePage(),
 //                        securityProperties.getAuthentication().getMobileCodeUrl()
-//                ).permitAll() // 放行/login/page不需要认证可访问
+                ).permitAll() // 放行/login/page不需要认证可访问
                 .anyRequest().authenticated() //所有访问该应用的http请求都要通过身份认证才可以访问
                 .and()
                 .rememberMe() // 记住功能配置

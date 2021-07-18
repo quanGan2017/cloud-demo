@@ -7,22 +7,24 @@ spring:
   application:
     name: cloud-client1
   datasource:
-    username: wanzhai_2020
-    password: wanzhai2020
-    url: jdbc:mysql://rm-2zecepz58whab23esoo.mysql.rds.aliyuncs.com:3306/wanzhai_2020?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: Gq20210703
+#    password: XiDYRI83QOpy9ADHPjNX8Tzn6jUgk1WttLxBppLTmODJHcaA60wH9Luu5WtCA/dmfs3wlsbUHWpLtJV/bH26Fw==
+#    publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAL5dqSknJLfEnx8lZ/r3WxA1zFkD5+Ftn4qPp0JCn5FA9NDFAfGCtWnA5OJPPtsEMpSCWueEKZyutEStAkX6ArMCAwEAAQ==
+    url: jdbc:mysql://rm-wz973y9ee1j192bnr9o.mysql.rds.aliyuncs.com:3306/mysql_cloud?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   redis:
-    host: 123.57.79.202
+    host: 120.79.80.228
     port: 6379
     password: 123456
-  rabbitmq:
-    host: 123.57.79.202
-    port: 5672
-    username: username
-    password: password
-    publisher-confirms: true
-    publisher-returns: true
+#  rabbitmq:
+#    host: 120.79.80.228
+#    port: 5672
+#    username: username
+#    password: password
+#    publisher-confirms: true
+#    publisher-returns: true
 
 
 eureka:
@@ -31,7 +33,7 @@ eureka:
     fetchRegistry: true
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://120.79.80.228:8761/eureka/
   instance:
     prefer-ip-address: true
     lease-expiration-duration-in-seconds: 10

@@ -1,5 +1,7 @@
 package com.example.cloudgateway.filter;
 
+import com.example.cloudcomm.base.User;
+import com.example.cloudcomm.util.JwtTokenUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,10 +33,12 @@ public class AuthAndLogFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-
+        logger.info("过滤器");
         ServerHttpRequest serverHttpRequest = exchange.getRequest();
         ServerHttpResponse serverHttpResponse = exchange.getResponse();
-
+        if("/cloud/auth/login".equals(serverHttpRequest.getPath().toString())){
+            return chain.filter(exchange);
+        }
         StringBuilder logBuilder = new StringBuilder();
         Map<String, String> params = parseRequest(exchange, logBuilder);
         boolean r = checkSignature(params, serverHttpRequest);
@@ -105,9 +109,13 @@ public class AuthAndLogFilter implements GlobalFilter, Ordered {
     }
 
     private boolean checkSignature(Map<String, String> params, ServerHttpRequest serverHttpRequest) {
+        User user = new User();
 
 
-        return false;
+
+        JwtTokenUtil.validateToken(params.get("t"),user);
+
+        return true;
     }
 
     @Override
